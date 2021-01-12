@@ -1,9 +1,18 @@
 import React, { useContext, useEffect } from "react";
 import UsersContext from "./context/UsersContext";
+import UserItem from "./UserItem";
 
 const Users = () => {
   const usersContext = useContext(UsersContext);
-  const { users, usersPerPage, loading, currentPage, getUsers, filtered } = usersContext;
+  const {
+    users,
+    usersPerPage,
+    loading,
+    currentPage,
+    getUsers,
+    filtered,
+    filteredSearch,
+  } = usersContext;
 
   useEffect(() => {
     getUsers();
@@ -23,16 +32,10 @@ const Users = () => {
   return (
     <div>
       {filtered.length !== 0
-        ? filterCurrentUsers.map((user, index) => (
-            <p key={index}>
-              {user.FirstName} {user.LastName} {user.Gender} {user.PaymentMethod}
-            </p>
-          ))
-        : currentUsers.map((user, index) => (
-            <p key={index}>
-              {user.FirstName} {user.LastName} {user.Gender} {user.PaymentMethod}
-            </p>
-          ))}
+        ? filterCurrentUsers.map((user, index) => <UserItem key={index} user={user} />)
+        : filteredSearch.length !== 0
+        ? filteredSearch.map((user, index) => <UserItem key={index} user={user} />)
+        : currentUsers.map((user, index) => <UserItem key={index} user={user} />)}
     </div>
   );
 };

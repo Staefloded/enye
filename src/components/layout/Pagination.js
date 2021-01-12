@@ -3,9 +3,10 @@ import UsersContext from "../context/UsersContext";
 
 export const Pagination = () => {
   const usersContext = useContext(UsersContext);
-  const { users, usersPerPage, setCurrentPage, getUsers, filtered } = usersContext;
+  const { users, usersPerPage, setCurrentPage, getUsers, filtered, filteredSearch } = usersContext;
   const totalUsers = users.length;
   const totalFilteredUsers = filtered.length;
+  const totalSearchFilteredUsers = filteredSearch.length;
 
   useEffect(() => {
     getUsers();
@@ -14,12 +15,16 @@ export const Pagination = () => {
 
   const pageNumbers = [];
   const filteredPageNumbers = [];
+  const filteredSearchPageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalUsers / usersPerPage); i++) {
     pageNumbers.push(i);
   }
   for (let i = 1; i <= Math.ceil(totalFilteredUsers / usersPerPage); i++) {
     filteredPageNumbers.push(i);
+  }
+  for (let i = 1; i <= Math.ceil(totalSearchFilteredUsers / usersPerPage); i++) {
+    filteredSearchPageNumbers.push(i);
   }
 
   return (
@@ -29,6 +34,14 @@ export const Pagination = () => {
           ? filteredPageNumbers.map((number) => (
               <li key={number}>
                 <a onClick={() => setCurrentPage(number)} href="!#">
+                  {number}
+                </a>
+              </li>
+            ))
+          : filteredSearchPageNumbers.length !== 0
+          ? filteredSearchPageNumbers.map((number) => (
+              <li key={number}>
+                <a onClick={() => setCurrentPage(number)} href="!#" style={{ display: "none" }}>
                   {number}
                 </a>
               </li>

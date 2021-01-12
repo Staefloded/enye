@@ -3,8 +3,9 @@ import {
   SET_CURRENT_PAGE,
   SET_LOADING,
   FILTER_USERS,
-  CLEAR_FILTERED,
+  CLEAR_FILTERED_SEARCH,
   CLEAR_USERS,
+  USER_NAME_SEARCH,
 } from "./type";
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -34,18 +35,23 @@ export default (state, action) => {
         ...state,
         filtered: state.users.filter((user) => {
           const regex = new RegExp(`${action.payload}`);
-          return (
-            user.Gender.match(regex) ||
-            user.PaymentMethod.match(regex) ||
-            (user.Gender.match(regex) && user.PaymentMethod.match(regex))
-          );
+          return user.Gender.match(regex) || user.PaymentMethod.match(regex);
         }),
       };
 
-    case CLEAR_FILTERED:
+    case USER_NAME_SEARCH:
       return {
         ...state,
-        filtered: null,
+        filteredSearch: state.users.filter((user) => {
+          const regex = new RegExp(`${action.payload}`, "gi");
+          return user.FirstName.match(regex) || user.LastName.match(regex);
+        }),
+      };
+
+    case CLEAR_FILTERED_SEARCH:
+      return {
+        ...state,
+        filteredSearch: [],
       };
 
     case CLEAR_USERS:

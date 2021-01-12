@@ -4,8 +4,9 @@ import {
   SET_LOADING,
   SET_CURRENT_PAGE,
   FILTER_USERS,
-  CLEAR_FILTERED,
+  CLEAR_FILTERED_SEARCH,
   CLEAR_USERS,
+  USER_NAME_SEARCH,
 } from "./type";
 import UsersContext from "./UsersContext";
 import usersReducer from "./usersReducer";
@@ -15,6 +16,7 @@ const UsersState = (props) => {
     users: [],
     loading: false,
     filtered: [],
+    filteredSearch: [],
     currentPage: 1,
     usersPerPage: 20,
   };
@@ -47,9 +49,16 @@ const UsersState = (props) => {
     });
   };
 
-  const clearFiltered = () => {
+  const userNameSearch = (text) => {
     dispatch({
-      type: CLEAR_FILTERED,
+      type: USER_NAME_SEARCH,
+      payload: text,
+    });
+  };
+
+  const clearFilteredSearch = () => {
+    dispatch({
+      type: CLEAR_FILTERED_SEARCH,
     });
   };
 
@@ -67,13 +76,15 @@ const UsersState = (props) => {
         users: state.users,
         loading: state.loading,
         filtered: state.filtered,
+        filteredSearch: state.filteredSearch,
         currentPage: state.currentPage,
         usersPerPage: state.usersPerPage,
         getUsers,
         setCurrentPage,
         filteredUsers,
-        clearFiltered,
+        clearFilteredSearch,
         clearUsers,
+        userNameSearch,
       }}
     >
       {props.children}
