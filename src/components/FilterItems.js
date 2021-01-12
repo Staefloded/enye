@@ -17,6 +17,7 @@ const FilterItems = () => {
       <form>
         <label htmlFor="gender">Gender</label>
         <div className="form-control">
+          <label htmlFor="Male">Male</label>
           <input
             type="radio"
             name="gender"
@@ -27,6 +28,7 @@ const FilterItems = () => {
           />
         </div>
         <div className="form-control">
+          <label htmlFor="Female">Female</label>
           <input
             type="radio"
             name="gender"
@@ -37,6 +39,7 @@ const FilterItems = () => {
           />
         </div>
         <div className="form-control">
+          <label htmlFor="Prefer to skip">Prefer to skip</label>
           <input
             type="radio"
             name="gender"
@@ -48,6 +51,7 @@ const FilterItems = () => {
         </div>
         <div className="form-control">
           <label htmlFor="paymentMethod">Payment Method</label>
+          <label htmlFor="Check">Check</label>
           <input
             type="radio"
             ref={paymentMethod}
@@ -56,6 +60,7 @@ const FilterItems = () => {
             value="check"
             onChange={onChange}
           />
+          <label htmlFor="CC">CC</label>
           <input
             type="radio"
             name="paymentMenthod"
@@ -64,6 +69,7 @@ const FilterItems = () => {
             value="cc"
             onChange={onChange}
           />
+          <label htmlFor="Money Order">Money Order</label>
           <input
             type="radio"
             ref={paymentMethod}
@@ -72,6 +78,7 @@ const FilterItems = () => {
             value="money order"
             onChange={onChange}
           />
+          <label htmlFor="Paypal">Paypal</label>
           <input
             type="radio"
             name="paymentMenthod"
